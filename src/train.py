@@ -7,9 +7,9 @@ import joblib
 
 datos = pd.read_csv("data/ventas.csv")
 
-X = datos[["Dia"]]
+X = datos[["dia"]]
 
-y = datos["Ventas"]
+y = datos["ventas"]
 
 modelo = LinearRegression()
 
