@@ -1,33 +1,31 @@
+
 name: Pipeline ML
 on:
-push:
-branches:
-- main
+        push:
+        branches:
+            - main
 
 jobs:
+        build:
+        runs-on: 
+            ubuntu-latest
 
-build:
+        steps:
+        - name: Descargar Repositorio
+        uses: actions/checkout@v4
+        - name: Instalar Python
+        uses: actions/setup-python@v4
+        with:
+        python-version: "3.11"
 
-runs-on: ubuntu-latest
+        - name: Instalar Dependencias
+                run: |
+                    pip install -r requirements.txt
 
-steps:
+        - name: Ejecutar Test
+                run: |
+                    pytest
 
-- name: Descargar Repositorio
-uses: actions/checkout@v4
-
-- name: Instalar Python
-uses: actions/setup-python@v4
-with:
-python-version: "3.11"
-
-- name: Instalar Dependencias
-run: |
-pip install -r requirements.txt
-
-- name: Ejecutar Test
-run: |
-pytest
-
-- name: Entrenar Modelo
-run: |
-python src/train.py
+        - name: Entrenar Modelo
+                run: |
+                    python src/train.py
